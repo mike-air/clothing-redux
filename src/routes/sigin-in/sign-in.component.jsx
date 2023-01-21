@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import Button from "../../components/button/button.component";
+import SignUpForm from "../../components/sign-up/sign-up-form.component";
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
@@ -8,13 +9,15 @@ const SignIn = () => {
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
     const useDocRef = await createUserDocumentFromAuth(user);
-    console.log(user);
   };
 
   return (
     <div>
       SignIn
-      <button onClick={logGoogleUser}>Sign in with Google Pop up</button>
+      <Button buttonType={"google"} onClick={logGoogleUser}>
+        Sign in with Google
+      </Button>
+      <SignUpForm />
     </div>
   );
 };
