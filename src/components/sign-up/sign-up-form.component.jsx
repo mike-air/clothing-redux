@@ -56,7 +56,7 @@ const SignUpForm = () => {
           label={"User name"}
           type="text"
           required
-          value={email}
+          value={displayName}
           onChange={handleChange}
           name={"displayName"}
         />
