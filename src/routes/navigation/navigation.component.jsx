@@ -22,7 +22,7 @@ const Navigation = () => {
           <CrwnLogo className="logo" />
         </Link>
         <div className="nav-links-container">
-          <Link className="nav-link" to={"/shop"}>
+          <Link className="nav-link" to={"/home/shop"}>
             Shop
           </Link>
 
@@ -31,7 +31,7 @@ const Navigation = () => {
               Sign out
             </span>
           ) : (
-            <Link className="nav-link" to={"/auth"}>
+            <Link className="nav-link" to={"/home/auth"}>
               SIGN IN
             </Link>
           )}

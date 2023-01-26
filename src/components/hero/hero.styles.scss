@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Bigelow+Rules&family=Philosopher:wght@700&family=Tangerine:wght@400;700&display=swap');
+.hero-container {
+    background-image: linear-gradient(rgba(24, 24, 24, 0.6), rgba(34, 34, 34, 0.8)),
+        url(../../assets/images/bg.jpg);
+    background-size: cover;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    padding: 4rem;
+    align-items: center;
+
+    .hero-text-container{
+width: 50%;
+
+    }
+
+    .hero-text{
+        font-size: 70px;
+        font-weight: bolder;
+    font-weight: 900;
+        color: #fe720a ;
+        font-family: 'Philosopher', sans-serif;
+    }
+
+    p{
+        font-size: 29px;
+        font-weight: 600;
+        color: #ccc;
+        line-height: 1;
+        // padding-left: 5px;
+    }
+
+    .btn{
+        padding: 12px 26px;
+        border: none;
+        margin-top: 10px;
+        cursor: pointer;
+        outline: none;
+        border-radius: 20px;
+        color: #fe720a;
+        font-weight: 500;
+        font-size: 16px;
+        transition: all 0.5s;
+        
+    }
+    .btn:hover{
+        background-color: #ccc;
+    }
+    
+}
+

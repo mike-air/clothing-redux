@@ -1,4 +1,5 @@
 import Directory from "../../components/directory/directory.component";
+import Hero from "../../components/hero/hero-component";
 
 const Home = () => {
   const categories = [
@@ -31,7 +32,6 @@ const Home = () => {
 
   return (
     <div>
-     
       <Directory categories={categories} />
     </div>
   );
