@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+// import * as firebase from "firebase";
 import {
   getAuth,
   signInWithRedirect,
@@ -10,7 +11,18 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  addDoc,
+  collection,arrayUnion,
+  writeBatch,
+  query,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -67,8 +79,6 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 };
 
-/***********Sign in with email and password***********/
-
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
@@ -84,4 +94,72 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>
-  onAuthStateChanged(auth,  callback);
+  onAuthStateChanged(auth, callback);
+
+/*******************************
+ *
+ * DB FIRESTORE SECTION
+ *
+ * ****************************/
+
+/****Exporting data to fireStore
+ * (adding multiple document in a collection)*****/
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log("DONE");
+};
+
+/* Writing data to the database. */
+export const addToDB = async (
+  collectionKey = "categories",category,
+  objectsToAdd
+) => {
+  // const collectionRef = collection(db, collectionKey);
+  const docRef = doc(db, collectionKey, 'hats');
+   
+  await updateDoc(docRef, {
+    items: arrayUnion(objectsToAdd),
+  });
+
+ 
+};
+/***********Sign in with email and password***********/
+
+export const getCategoriesAndDocuments = async (
+  collectionKey = "categories"
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const q = query(collectionRef);
+
+  const querySnapShot = await getDocs(q);
+  const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
+    const { title, items } = docSnapShot.data();
+
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return categoryMap;
+};
+
+
+export const getUserDB = async () => {
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+
+    return doc.data()
+  });
+} 

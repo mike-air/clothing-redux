@@ -10,11 +10,12 @@ import Hero from "./components/hero/hero-component";
 
 const App = () => {
   return (
-    <Routes>
-      <Route element={<Hero/>} path='/' />
+    <Routes >
+      <Route element={<Hero />} path='/' />
+      
       <Route path="/home" element={<Navigation />}>
         <Route index element={<Home />} />
-        <Route path="shop" element={<Shop />} />
+        <Route path="shop/*" element={<Shop />} />
         <Route path="checkout" element={<CheckOut />} />
         <Route path="auth" element={<Authentication />} />
       </Route>

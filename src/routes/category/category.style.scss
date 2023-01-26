@@ -1,0 +1,19 @@
+.category-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+
+    column-gap: 20px;
+    row-gap: 50px;
+   
+}
+
+ .category-title{
+        font-size: 38px;
+        font-family: 'Poppins';
+        text-align: center;
+        margin-bottom: 25px;
+    }
+ .back{
+        font-size: 32px;
+        padding:0 30px;
+    }

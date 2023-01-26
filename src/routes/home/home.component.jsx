@@ -31,7 +31,7 @@ const Home = () => {
   ];
 
   return (
-    <div>
+    <div style={{padding:'20px'}}>
       <Directory categories={categories} />
     </div>
   );

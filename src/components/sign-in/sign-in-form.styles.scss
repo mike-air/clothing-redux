@@ -1,7 +1,11 @@
 .sign-up-container{
     display:flex;
 flex-direction:column;
-width: 380px;
+padding: 40px;
+box-sizing: border-box;
+width: 1000px;
+background-color: #fe720a;
+box-shadow: 0 0 50px ;
 
 h2{
     margin-top: 10px 0;
@@ -9,6 +13,8 @@ h2{
 
 .buttons-container{
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     justify-content: space-between;
 }
 }
