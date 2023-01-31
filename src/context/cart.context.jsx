@@ -11,6 +11,34 @@ export const CartContext = createContext({
   cartTotal: 0,
 });
 
+// 1 -  Set your initial value
+
+const INITIAL_STATE = {
+  isCartOpen: false,
+  cartItems: [],
+  cartCount: 0,
+  cartTotal: 0,
+};
+
+// 2 - create a reducer
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case "SET_CART_ITEMS":
+      return {
+        ...state,
+        ...payload,
+      };
+    default:
+      throw new Error(`Unhandled type of , ${type} in cart Reducer`);
+  }
+};
+
+
+
+
+
 const addCartItems = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
@@ -50,16 +78,50 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
+
+
+const updateCartItemsReducer = (newCartItems) => {
+  /***
+   * generate newCartCount
+    
+   * Generate newCartTotal
+   
+   * Dispatch new Action with payload = {
+     newCartItems,
+     newCartTotal,
+     newCartCount
+    }
+   * */
+
+    const newCartTotal = newCartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity * cartItem.price,
+      0
+    );
+  const newCartCount = newCartItems.reduce(
+    (total, cartItem) => total + cartItem.quantity,
+    0
+  );
+};
+
+
+
+
+
   const addItemToCart = (productToAdd) => {
-    setCartItems(addCartItems(cartItems, productToAdd));
+    const newCartItems = addCartItems(cartItems, productToAdd);
+    updateCartItemsReducer(newCartItems)
   };
 
   const removeItemToCart = (cartItemToRemove) => {
-    setCartItems(removeCartItem(cartItems, cartItemToRemove));
+    const newCartItems = removeCartItem(cartItems, cartItemToRemove);
+    updateCartItemsReducer(newCartItems);
+    
   };
 
   const clearItemFromCart = (cartItemToClear) => {
-    setCartItems(clearCartItem(cartItems, cartItemToClear));
+    const newCartItems = clearCartItem(cartItems, cartItemToClear);
+    updateCartItemsReducer(newCartItems);
+
   };
 
   useEffect(() => {

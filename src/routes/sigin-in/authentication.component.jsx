@@ -1,12 +1,11 @@
-import { createContext, useContext,useEffect } from "react";
+import { useEffect } from "react";
 import SignInForm from "../../components/sign-in/sign-in-form.component";
-import SignUpForm from "../../components/sign-up/sign-up-form.component";
-import { UserContext } from "../../context/user.context";
 import "./authentication.style.scss";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const SignIn = () => {
 
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(state => state.user.currentUser)
   const navigate = useNavigate()
   useEffect(() => {
     if (currentUser) {

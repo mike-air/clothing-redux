@@ -1,6 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
-import { Fragment, useContext ,useEffect,useState} from "react";
-import { UserContext } from "../../context/user.context";
+import { useSelector } from "react-redux";
+import { Fragment, useContext, useEffect, useState } from "react";
 import "./navigation.styles.scss";
 
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
@@ -8,17 +8,19 @@ import { getUserDB, signOutUser } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component";
 import { CartContext } from "../../context/cart.context";
+import { selectCurrentUser } from "../../store/user/user.selector";
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
+  // const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
-  const [isAdmin,setIsAdmin] = useState(false)
-  useEffect(() => {
-    const addData = async () => {
-      await getUserDB();
-    };
-    addData();
-  }, []);
-
+  // const [isAdmin, setIsAdmin] = useState(false);
+  // useEffect(() => {
+  //   const addData = async () => {
+  //     await getUserDB();
+  //   };
+  //   addData();
+  // }, []);
+console.log(currentUser)
   return (
     <Fragment>
       <div className="navigation">

@@ -126,7 +126,7 @@ export const addToDB = async (
   objectsToAdd
 ) => {
   // const collectionRef = collection(db, collectionKey);
-  const docRef = doc(db, collectionKey, 'hats');
+  const docRef = doc(db, collectionKey, category);
    
   await updateDoc(docRef, {
     items: arrayUnion(objectsToAdd),
@@ -134,7 +134,6 @@ export const addToDB = async (
 
  
 };
-/***********Sign in with email and password***********/
 
 export const getCategoriesAndDocuments = async (
   collectionKey = "categories"
@@ -158,7 +157,7 @@ export const getUserDB = async () => {
   const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
 
     return doc.data()
   });
